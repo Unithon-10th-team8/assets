@@ -1,0 +1,27 @@
+name: Upload assets to R2 - Development
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  build:
+    environment: dev
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Remove .DS_Store
+        run: find . -name ".DS_Store" -delete
+
+      - name: R2 Directory Upload
+        uses: willfurstenau/r2-dir-upload@main
+        with:
+          accountid: ${{ secrets.CF_ACCOUNT_ID }}
+          accesskeyid: ${{ secrets.CF_ACCESS_KEY }}
+          secretaccesskey: ${{ secrets.CF_SECRET_KEY }}
+          bucket: ${{ secrets.R2_BUCKET }}
+          source: ${{ github.workspace }}/static
+          destination: /
