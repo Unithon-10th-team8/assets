@@ -6,7 +6,6 @@ on:
 
 jobs:
   build:
-    environment: main
     runs-on: ubuntu-latest
 
     steps:
@@ -19,9 +18,9 @@ jobs:
       - name: R2 Directory Upload
         uses: willfurstenau/r2-dir-upload@main
         with:
-          accountid: ${{ secrets.CF_ACCOUNT_ID }}
-          accesskeyid: ${{ secrets.CF_ACCESS_KEY }}
-          secretaccesskey: ${{ secrets.CF_SECRET_KEY }}
-          bucket: ${{ secrets.R2_BUCKET }}
+          accountid: ${{ secrets.CF_ACCOUNT_ID_PROD }}
+          accesskeyid: ${{ secrets.CF_ACCESS_KEY_PROD }}
+          secretaccesskey: ${{ secrets.CF_SECRET_KEY_PROD }}
+          bucket: ${{ secrets.R2_BUCKET_PROD }}
           source: ${{ github.workspace }}/static
           destination: /
